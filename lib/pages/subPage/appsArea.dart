@@ -11,9 +11,8 @@ class AppsArea extends StatefulWidget {
 }
 
 class _AppsAreaState extends State<AppsArea> {
-  BouncingScrollPhysics _bouncingScrollPhysics = BouncingScrollPhysics();
   List<Color> colors = [
-    Colors.red,
+    Colors.redAccent,
     Colors.purple,
     Colors.deepOrange,
     Colors.blue,
@@ -32,13 +31,14 @@ class _AppsAreaState extends State<AppsArea> {
         if (snapshot.connectionState == ConnectionState.done) {
           List<Application>? allApps = snapshot.data;
           return GridView.count(
+            shrinkWrap: true,
             crossAxisCount: 5,
             childAspectRatio: 1.5,
-            physics: _bouncingScrollPhysics,
+            physics: NeverScrollableScrollPhysics(),
             children: List.generate(allApps!.length, (index) {
               int cindex = random.nextInt(colors.length);
               Color tempcol = colors[cindex];
-              return GestureDetector(
+              return InkWell(
                 onTap: () {
                   DeviceApps.openApp(allApps[index].packageName);
                 },
@@ -81,12 +81,13 @@ class _AppsAreaState extends State<AppsArea> {
               );
             }),
           );
+        } else {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         }
-        return Container(
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
       },
     );
   }
