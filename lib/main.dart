@@ -30,6 +30,7 @@ class _mainSfullState extends State<mainSfull> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: Image(
           image: AssetImage("assets/images/bi/Bi1.png"),
@@ -37,20 +38,26 @@ class _mainSfullState extends State<mainSfull> {
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
           IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
-          Visibility(
-            visible: false,
-            child: CircleAvatar(
-              backgroundColor: Colors.purple,
-              foregroundColor: Colors.black,
-              child: IconButton(
-                  onPressed: () {}, icon: Icon(Icons.arrow_circle_down_sharp)),
-            ),
-          ),
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: HomePage(),
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF060131),
+              Color(0xFF18122B),
+              Color(0xFF18122B),
+              Color(0xFFD21312),
+            ],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+          ),
+        ),
+        child: HomePage(),
+      ),
     );
   }
 }
