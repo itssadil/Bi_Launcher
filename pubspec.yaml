@@ -38,6 +38,8 @@ dependencies:
   device_apps: ^2.2.0
   rive: ^0.10.3
   http: ^0.13.5
+  video_player: ^2.6.1
+  chewie: ^1.4.0
 
 dev_dependencies:
   flutter_test:

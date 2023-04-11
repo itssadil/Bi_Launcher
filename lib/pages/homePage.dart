@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             HeaderArea(),
             AppsArea(),

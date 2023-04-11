@@ -1,6 +1,5 @@
+import 'package:bi_launcher/pages/homePage.dart';
 import 'package:flutter/material.dart';
-
-import 'pages/homePage.dart';
 
 void main() {
   runApp(const MyApp());

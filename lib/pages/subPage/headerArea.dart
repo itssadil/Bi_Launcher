@@ -1,6 +1,9 @@
+import 'dart:convert';
+
+import 'package:bi_launcher/widgets/headerMovieInfo.dart';
+import 'package:bi_launcher/widgets/waitingForInfo.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
-// import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class HeaderArea extends StatefulWidget {
   const HeaderArea({Key? key}) : super(key: key);
@@ -10,139 +13,89 @@ class HeaderArea extends StatefulWidget {
 }
 
 class _HeaderAreaState extends State<HeaderArea> {
-  // late YoutubePlayerController _controller;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controller = YoutubePlayerController(
-  //     initialVideoId: '6UeLU0uWGbU',
-  //     flags: YoutubePlayerFlags(
-  //       autoPlay: false,
-  //       mute: false,
-  //       controlsVisibleAtStart: true,
-  //     ),
-  //   );
-  // }
+  List<Map<String, dynamic>>? _moviesInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    _getMoviesInfo();
+  }
+
+  Future<void> _getMoviesInfo() async {
+    final String apiKey = 'b76a2dbf8c9342e2d6eb6b2c2e8c8a60';
+    final List<int> movieIds = [
+      864692,
+      496331,
+      57800,
+      579974,
+      835017
+    ]; // The TMDB IDs of the movies
+    final String url =
+        'https://api.themoviedb.org/3/movie/{movieId}?api_key=$apiKey&append_to_response=credits';
+
+    final moviesInfo = <Map<String, dynamic>>[];
+    for (final movieId in movieIds) {
+      final response = await http
+          .get(Uri.parse(url.replaceFirst('{movieId}', movieId.toString())));
+      if (response.statusCode == 200) {
+        moviesInfo.add(json.decode(response.body));
+      } else {
+        throw Exception('Failed to load movie information');
+      }
+    }
+
+    setState(() {
+      _moviesInfo = moviesInfo;
+    });
+  }
+
+  String _getGenres(Map<String, dynamic> movieInfo) {
+    List<dynamic> genres = movieInfo['genres'];
+    return genres.map((genre) => genre['name']).join(', ');
+  }
+
+  String _getCast(Map<String, dynamic> movieInfo) {
+    List<dynamic> cast = movieInfo['credits']['cast'];
+    return cast.take(3).map((person) => person['name']).join(', ');
+  }
+
+  int _getReleaseYear(Map<String, dynamic> movieInfo) {
+    String releaseDate = movieInfo['release_date'];
+    return int.parse(releaseDate.split('-')[0]);
+  }
+
+  double _getRating(Map<String, dynamic> movieInfo) {
+    double rating = movieInfo['vote_average'];
+    return (rating * 10).roundToDouble() / 10;
+  }
+
+  String _getMovieLength(Map<String, dynamic> movieInfo) {
+    int totalMinutes = movieInfo['runtime'];
+    int hours = totalMinutes ~/ 60;
+    int minutes = totalMinutes % 60;
+    return '$hours hr $minutes min';
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
-        child: Row(
-          children: [
-            // Container(
-            //   margin: EdgeInsets.symmetric(horizontal: 5),
-            //   height: size.height * 0.35,
-            //   width: size.width * 0.6,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.all(Radius.circular(5)),
-            //     boxShadow: [
-            //       BoxShadow(
-            //         color: Colors.red.withOpacity(0.2),
-            //         spreadRadius: 1,
-            //         blurRadius: 7,
-            //         offset: Offset(0, 3), // changes position of shadow
-            //       ),
-            //     ],
-            //     color: Color(0xFF18122B),
-            //   ),
-            //   child: YoutubePlayer(
-            //     controller: _controller,
-            //     showVideoProgressIndicator: true,
-            //     progressIndicatorColor: Colors.red,
-            //   ),
-            // ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              height: size.height * 0.35,
-              width: size.width * 0.6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.red.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                color: Color(0xFF18122B),
+      child: Container(
+        height: size.height * 0.35,
+        child: _moviesInfo == null
+            ? WaitingForInfo(
+                size: size,
+              )
+            : HeaderMovieInfo(
+                size: size,
+                getReleaseYear: _getReleaseYear,
+                getMovieLength: _getMovieLength,
+                getRating: _getRating,
+                getCast: _getCast,
+                getGenres: _getGenres,
+                moviesDetails: _moviesInfo,
               ),
-              child: RiveAnimation.asset(
-                "assets/rive/app_loading.riv",
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              height: size.height * 0.35,
-              width: size.width * 0.6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.red.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                color: Color(0xFF18122B),
-              ),
-              child: RiveAnimation.asset(
-                "assets/rive/app_loading.riv",
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              height: size.height * 0.35,
-              width: size.width * 0.6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.red.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                color: Color(0xFF18122B),
-              ),
-              child: RiveAnimation.asset(
-                "assets/rive/app_loading.riv",
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              height: size.height * 0.35,
-              width: size.width * 0.6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.red.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                color: Color(0xFF18122B),
-              ),
-              child: RiveAnimation.asset(
-                "assets/rive/app_loading.riv",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
