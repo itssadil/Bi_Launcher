@@ -16,10 +16,10 @@ class _HeaderMoviesState extends State<HeaderMovies> {
   late ChewieController _chewieController;
   List movieLink = [
     'https://stopr004.sh-content.com/v/01/00248/z3p1bdzrpeyu_n/Pathaan_(2023)_Hindi_-_720P_HD.mkv.mp4?t=vcz6wMIVTYao9Vzu8I9OTfe8vVGb13Xr4RBl-dhnoFs&s=1681242801&e=129600&f=1242736&sp=400&i=0.0',
-    'https://sto213.akamai-video-content.com/tysxeiu6og76j6cdactdvtceolh5ctqsw2lymkiiybx6pxde2ybw65njuhfa/Brahmastra_Part_One_-_Shiva_(2022_Hindi_HD_Hotstar_-_720P.mkv.mp4',
-    'https://s-delivery36.mxdcontent.net/d/j9x88vqlse1qgx/kxchh5azpknfh83lg7zjyijp8voww4?ab=0&r=https%3A%2F%2Fmixdrop.gl%2Ff%2Fj9x88vqlse1qgx',
-    'https://s-delivery51.mxdcontent.net/d/4n1l90lqt63pm3/xsa3zi2y1c2cu997ennoiyvgbxgq?ab=0&r=https%3A%2F%2Fmixdrop.ch%2Ff%2F4n1l90lqt63pm3',
-    'https://nioucmyycmwloavuppra.akamai-video-content.com/tysxfbrpww7oj6cdadbdjgsdevmtwgow5dluhu4wtmxvxryqrocunrvnx7la/Varisu_(2023)_Hindi_Dubbed_AMZN_720P_HDMOVIE2.mkv.mp4',
+    'https://sugar-2.flsvr.com/d/3vihjdlxt6wfsllhqe422i4npg5r6hary5haz2jwqiqhpp7uyuoowfy7453daghhvijnjurx/Ala%20Vaikunthapurramuloo%20(2020)%20Hindi%20Dubbed%20[Original%20Audio]-720P.mkv',
+    'https://sto009noview.sh-content.com/v/01/00315/r8pix1hmv8jk_n/Ice_Age_Continental_Drift_(2012)_Hindi_Dubbed_720P.mkv.mp4?t=f21TbcbaNxvgY5ys7V_m32TV6OLOidCvkHUurCWua_w&s=1681319425&e=129600&f=1575413&sp=400&i=0.0',
+    'https://stopr005.sh-content.com/v/01/00229/ibdhmkn5mna4_h/Vaathi_(2023)_Hindi_Dubbed_HD_720P_HDMOVIE2.mkv.mp4?t=HurPHQwzfQldUvZRKEi4szF4hMH2zj4TB0D2GguXrB4&s=1681320660&e=129600&f=1145199&sp=400&i=0.0',
+    'https://sugar-2.flsvr.com/d/3vij5xdxt6wfsllhru43mkmqphms2yqsjnh3d6obusvnadgnhufkofhwajnrlffeiqiivnkh/K.G.F%20Chapter%201%20(2018)%20Hindi%20Dubbed%20720P%20HDMOVIE5.mkv',
   ];
 
   @override

@@ -25,10 +25,10 @@ class _HeaderAreaState extends State<HeaderArea> {
     final String apiKey = 'b76a2dbf8c9342e2d6eb6b2c2e8c8a60';
     final List<int> movieIds = [
       864692,
-      496331,
+      628241,
       57800,
-      579974,
-      835017
+      918864,
+      564147
     ]; // The TMDB IDs of the movies
     final String url =
         'https://api.themoviedb.org/3/movie/{movieId}?api_key=$apiKey&append_to_response=credits';
