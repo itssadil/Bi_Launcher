@@ -7,11 +7,13 @@ import 'package:rive/rive.dart';
 class AllApps extends StatelessWidget {
   final int appsCrossAxisCount;
   final double appschildAspectRatio;
+  final double appIconWidth;
   final bool isClr;
   AllApps(
       {Key? key,
       required this.appsCrossAxisCount,
       required this.appschildAspectRatio,
+      required this.appIconWidth,
       required this.isClr})
       : super(key: key);
 
@@ -58,16 +60,14 @@ class AllApps extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // SizedBox(
-                          //   height: 17,
-                          // ),
                           Image.memory(
                             (allApps[index] as ApplicationWithIcon).icon,
-                            width: 50,
+                            width: appIconWidth,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 2,
                           ),
                           Padding(
                             padding:

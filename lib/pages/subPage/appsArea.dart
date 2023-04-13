@@ -13,6 +13,7 @@ class _AppsAreaState extends State<AppsArea> {
   Widget build(BuildContext context) {
     return AllApps(
       appschildAspectRatio: 1.5,
+      appIconWidth: 80,
       isClr: true,
       appsCrossAxisCount: 5,
     );

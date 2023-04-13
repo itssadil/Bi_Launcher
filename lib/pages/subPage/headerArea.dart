@@ -1,9 +1,12 @@
 import 'dart:convert';
 
-import 'package:bi_launcher/widgets/headerMovieInfo.dart';
-import 'package:bi_launcher/widgets/waitingForInfo.dart';
+import 'package:bi_launcher/pages/subPage/headerSubPage/headerMovieInfo.dart';
+import 'package:bi_launcher/providers/sectionControls.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import 'headerSubPage/headerWidgets.dart';
 
 class HeaderArea extends StatefulWidget {
   const HeaderArea({Key? key}) : super(key: key);
@@ -79,24 +82,35 @@ class _HeaderAreaState extends State<HeaderArea> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Container(
-        height: size.height * 0.35,
-        child: _moviesInfo == null
-            ? WaitingForInfo(
-                size: size,
-              )
-            : HeaderMovieInfo(
-                size: size,
-                getReleaseYear: _getReleaseYear,
-                getMovieLength: _getMovieLength,
-                getRating: _getRating,
-                getCast: _getCast,
-                getGenres: _getGenres,
-                moviesDetails: _moviesInfo,
-              ),
-      ),
+    return Consumer<HeaderMoviesCtrl>(
+      builder: (context, isHeaderMovie, child) {
+        return Column(
+          children: [
+            /*===============================================================
+                                    HEADER MOVIE INFO
+            ================================================================*/
+
+            HeaderMovieInfo(
+              isHeaderMovie: isHeaderMovie,
+              size: size,
+              getReleaseYear: _getReleaseYear,
+              getMovieLength: _getMovieLength,
+              getRating: _getRating,
+              getCast: _getCast,
+              getGenres: _getGenres,
+              moviesDetails: _moviesInfo,
+            ),
+
+            /*===============================================================
+                                    HEADER WIDGET
+            ================================================================*/
+
+            HeaderWidgets(
+              isHeaderMovie: isHeaderMovie,
+            )
+          ],
+        );
+      },
     );
   }
 }

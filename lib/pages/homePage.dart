@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'subPage/appsArea.dart';
-import 'subPage/btmSheet.dart';
 import 'subPage/headerArea.dart';
+import 'subPage/sidebar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
                 AppsArea(),
               ],
             ),
-            BtmSheet(),
+            Sidebar(),
           ],
         ),
       ),

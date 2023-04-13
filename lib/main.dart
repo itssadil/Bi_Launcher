@@ -1,8 +1,19 @@
 import 'package:bi_launcher/pages/homePage.dart';
+import 'package:bi_launcher/providers/sectionControls.dart';
+import 'package:bi_launcher/widgets/myDrawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HeaderMoviesCtrl()),
+        ChangeNotifierProvider(create: (context) => SidebarCtrl()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,13 +41,25 @@ class _mainSfullState extends State<mainSfull> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      endDrawer: Drawer(
+        child: MyDrawer(),
+      ),
       appBar: AppBar(
         leading: Image(
           image: AssetImage("assets/images/bi/Bi1.png"),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
+          Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                icon: Icon(Icons.menu),
+              );
+            },
+          ),
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
