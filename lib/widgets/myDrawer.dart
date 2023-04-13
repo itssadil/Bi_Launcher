@@ -12,6 +12,19 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           Card(
+            color: Colors.blue,
+            child: ListTile(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              leading: Icon(
+                Icons.arrow_back_rounded,
+                color: Colors.white,
+              ),
+              title: Text("Control Center"),
+            ),
+          ),
+          Card(
             child: ExpansionTile(
               leading: Icon(Icons.display_settings_outlined),
               title: Text('Section Control'),
