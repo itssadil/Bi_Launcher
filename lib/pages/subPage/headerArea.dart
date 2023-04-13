@@ -101,13 +101,6 @@ class _HeaderAreaState extends State<HeaderArea> {
               moviesDetails: _moviesInfo,
             ),
 
-            /*===============================================================
-                                    HEADER WIDGET
-            ================================================================*/
-
-            HeaderWidgets(
-              isHeaderMovie: isHeaderMovie,
-            )
           ],
         );
       },
