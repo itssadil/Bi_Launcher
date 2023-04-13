@@ -50,6 +50,56 @@ class AllApps extends StatelessWidget {
                 onTap: () {
                   DeviceApps.openApp(allApps[index].packageName);
                 },
+                onLongPress: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SimpleDialog(
+                        title: Text("${allApps[index].appName}"),
+                        children: <Widget>[
+                          SimpleDialogOption(
+                            onPressed: () {
+                              DeviceApps.openAppSettings(
+                                  allApps[index].packageName);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.info),
+                                SizedBox(width: 10),
+                                Text('App Info'),
+                              ],
+                            ),
+                          ),
+                          SimpleDialogOption(
+                            onPressed: () {
+                              DeviceApps.uninstallApp(
+                                  allApps[index].packageName);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.dangerous),
+                                SizedBox(width: 10),
+                                Text('Uninstall'),
+                              ],
+                            ),
+                          ),
+                          SimpleDialogOption(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.backspace_outlined),
+                                SizedBox(width: 10),
+                                Text('Close'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   // color: Color(0xff303030),
                   child: Padding(

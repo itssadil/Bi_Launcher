@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'headerSubPage/headerWidgets.dart';
-
 class HeaderArea extends StatefulWidget {
   const HeaderArea({Key? key}) : super(key: key);
 
@@ -100,7 +98,6 @@ class _HeaderAreaState extends State<HeaderArea> {
               getGenres: _getGenres,
               moviesDetails: _moviesInfo,
             ),
-
           ],
         );
       },
