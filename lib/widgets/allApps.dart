@@ -60,7 +60,9 @@ class AllApps extends StatelessWidget {
                           SimpleDialogOption(
                             onPressed: () {
                               DeviceApps.openAppSettings(
-                                  allApps[index].packageName);
+                                allApps[index].packageName,
+                              );
+                              Navigator.of(context).pop();
                             },
                             child: Row(
                               children: [
@@ -75,6 +77,7 @@ class AllApps extends StatelessWidget {
                               DeviceApps.uninstallApp(
                                 allApps[index].packageName,
                               );
+                              Navigator.of(context).pop();
                             },
                             child: Row(
                               children: [
