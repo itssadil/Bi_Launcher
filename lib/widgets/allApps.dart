@@ -73,7 +73,8 @@ class AllApps extends StatelessWidget {
                           SimpleDialogOption(
                             onPressed: () {
                               DeviceApps.uninstallApp(
-                                  allApps[index].packageName);
+                                allApps[index].packageName,
+                              );
                             },
                             child: Row(
                               children: [
