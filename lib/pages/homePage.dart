@@ -14,9 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<void> _handleRefresh() async {
     // Add the logic to reload the data or refresh the UI here
-    setState(() {
-      // Update your app's data here
-    });
+    setState(() {});
   }
 
   @override
