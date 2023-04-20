@@ -40,7 +40,6 @@ class FavArea extends StatelessWidget {
                                 // Image.memory(
                                 //   (app as ApplicationWithIcon).icon,
                                 //   width: 48.0,
-                                //   height: 48.0,
                                 // ),
                                 SizedBox(height: 8.0),
                                 Text(

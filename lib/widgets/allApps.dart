@@ -65,7 +65,10 @@ class AllApps extends StatelessWidget {
                               return SimpleDialogOption(
                                 onPressed: () {
                                   favMovieList.addFavMovieList(
-                                      allApps[index].packageName, context);
+                                    allApps[index].packageName,
+                                    allApps[index].appName,
+                                    context,
+                                  );
                                   Navigator.of(context).pop();
                                 },
                                 child: Row(

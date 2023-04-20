@@ -14,14 +14,30 @@ class FavMovieList extends ChangeNotifier {
     syncDataWithProvider();
   }
 
-  Future addFavMovieList(newFav, context) async {
-    if (_appPackageNames.contains(newFav)) {
+  Future addFavMovieList(newFav, appName, context) async {
+    if (_appPackageNames.length == 5) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.indigo,
           content: Center(
             child: Text(
-              'Youtube is already in the favorites list',
+              'You can add a maximum of 5 apps to the favorites list',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } else if (_appPackageNames.contains(newFav)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.indigo,
+          content: Center(
+            child: Text(
+              '$appName is already in the favorites list',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
