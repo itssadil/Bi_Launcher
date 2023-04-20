@@ -14,12 +14,27 @@ class FavMovieList extends ChangeNotifier {
     syncDataWithProvider();
   }
 
-  Future addFavMovieList(newFav) async {
-    _appPackageNames.add(newFav);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future addFavMovieList(newFav, context) async {
+    if (_appPackageNames.contains(newFav)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.indigo,
+          content: Text(
+            'Youtube is already in the favorites list',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } else {
+      _appPackageNames.add(newFav);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.setStringList('prefAppPackageNames', _appPackageNames);
-
+      await prefs.setStringList('prefAppPackageNames', _appPackageNames);
+    }
     notifyListeners();
   }
 
