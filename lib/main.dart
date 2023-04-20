@@ -1,5 +1,6 @@
 import 'package:bi_launcher/pages/homePage.dart';
 import 'package:bi_launcher/providers/favProvider.dart';
+import 'package:bi_launcher/providers/searchProvider.dart';
 import 'package:bi_launcher/providers/sectionControls.dart';
 import 'package:bi_launcher/widgets/myDrawer.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => FavCtrl()),
         ChangeNotifierProvider(create: (context) => SidebarCtrl()),
         ChangeNotifierProvider(create: (context) => FavMovieList()),
+        ChangeNotifierProvider(create: (context) => SearchProvider()),
       ],
       child: MyApp(),
     ),
@@ -40,6 +42,14 @@ class mainSfull extends StatefulWidget {
 }
 
 class _mainSfullState extends State<mainSfull> {
+  TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +61,34 @@ class _mainSfullState extends State<mainSfull> {
         leading: Image(
           image: AssetImage("assets/images/bi/Bi1.png"),
         ),
+        title: Consumer<SearchProvider>(
+          builder: (context, isShowSearch, child) {
+            return Visibility(
+              visible: isShowSearch.isShowSearch,
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: InputBorder.none,
+                ),
+                style: TextStyle(color: Colors.white),
+                onSubmitted: (value) {
+                  // Handle search logic here
+                },
+              ),
+            );
+          },
+        ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          Consumer<SearchProvider>(builder: (context, isShowSearch, child) {
+            return IconButton(
+              onPressed: () {
+                isShowSearch.cngShowSearch();
+              },
+              icon: isShowSearch.srcIcon,
+            );
+          }),
           Builder(
             builder: (context) {
               return IconButton(
