@@ -16,37 +16,10 @@ class FavMovieList extends ChangeNotifier {
 
   Future addFavMovieList(newFav, appName, context) async {
     if (_appPackageNames.length == 5) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.indigo,
-          content: Center(
-            child: Text(
-              'You can add a maximum of 5 apps to the favorites list',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          duration: Duration(seconds: 3),
-        ),
-      );
+      FavToast(
+          context, "You can add a maximum of 5 apps to the favorites list");
     } else if (_appPackageNames.contains(newFav)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.indigo,
-          content: Center(
-            child: Text(
-              '$appName is already in the favorites list',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          duration: Duration(seconds: 3),
-        ),
-      );
+      FavToast(context, "$appName is already in the favorites list");
     } else {
       _appPackageNames.add(newFav);
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -74,5 +47,23 @@ class FavMovieList extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  FavToast(context, toastText) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.indigo,
+        content: Center(
+          child: Text(
+            '$toastText',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
   }
 }
