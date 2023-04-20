@@ -19,11 +19,13 @@ class FavMovieList extends ChangeNotifier {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.indigo,
-          content: Text(
-            'Youtube is already in the favorites list',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          content: Center(
+            child: Text(
+              'Youtube is already in the favorites list',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           duration: Duration(seconds: 3),
