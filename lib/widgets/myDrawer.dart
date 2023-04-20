@@ -39,6 +39,16 @@ class MyDrawer extends StatelessWidget {
                     );
                   },
                 ),
+                Consumer<FavCtrl>(
+                  builder: (context, isFav, child) {
+                    return SwitchListTile(
+                      value: isFav.isFav,
+                      activeColor: Colors.blue,
+                      onChanged: (value) => isFav.cngFav(),
+                      title: Text("Favorite Area"),
+                    );
+                  },
+                ),
                 Consumer<SidebarCtrl>(
                   builder: (context, isSidebar, child) {
                     return SwitchListTile(

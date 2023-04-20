@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'subPage/appsArea.dart';
+import 'subPage/favArea.dart';
 import 'subPage/headerArea.dart';
 import 'subPage/sidebar.dart';
 
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   HeaderArea(),
+                  FavArea(),
                   AppsArea(),
                 ],
               ),

@@ -37,6 +37,42 @@ class HeaderMoviesCtrl extends ChangeNotifier {
     notifyListeners();
   }
 }
+/*===============================================================
+                      FAVORITE CONTROL
+================================================================*/
+
+class FavCtrl extends ChangeNotifier {
+  bool _isFav = true;
+  bool get isFav => _isFav;
+
+  FavCtrl() {
+    initialState();
+  }
+
+  void initialState() {
+    syncDataWithProvider();
+  }
+
+  Future cngFav() async {
+    _isFav = !_isFav;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setBool('prefFavMovie', _isFav);
+
+    notifyListeners();
+  }
+
+  Future syncDataWithProvider() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var reslut = prefs.getBool('prefFavMovie');
+
+    if (reslut != null) {
+      _isFav = reslut;
+    }
+
+    notifyListeners();
+  }
+}
 
 /*===============================================================
                       SIDEBAR CONTROL

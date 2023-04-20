@@ -9,6 +9,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HeaderMoviesCtrl()),
+        ChangeNotifierProvider(create: (context) => FavCtrl()),
         ChangeNotifierProvider(create: (context) => SidebarCtrl()),
       ],
       child: MyApp(),
