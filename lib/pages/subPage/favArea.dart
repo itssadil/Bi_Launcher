@@ -38,7 +38,7 @@ class FavArea extends StatelessWidget {
                             child: Container(
                               margin: EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white12),
+                                border: Border.all(color: Colors.white38),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
                               ),
