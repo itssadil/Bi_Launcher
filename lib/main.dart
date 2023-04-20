@@ -1,4 +1,5 @@
 import 'package:bi_launcher/pages/homePage.dart';
+import 'package:bi_launcher/providers/favProvider.dart';
 import 'package:bi_launcher/providers/sectionControls.dart';
 import 'package:bi_launcher/widgets/myDrawer.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => HeaderMoviesCtrl()),
         ChangeNotifierProvider(create: (context) => FavCtrl()),
         ChangeNotifierProvider(create: (context) => SidebarCtrl()),
+        ChangeNotifierProvider(create: (context) => FavMovieList()),
       ],
       child: MyApp(),
     ),

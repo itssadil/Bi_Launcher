@@ -17,7 +17,7 @@ Widget HeaderMovieInfo({
     visible: isHeaderMovie.isHeaderMovie,
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Container(
+      child: SizedBox(
         height: size.height * 0.35,
         child: moviesDetails == null
             ? WaitingForInfo(

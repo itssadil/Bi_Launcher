@@ -1,4 +1,7 @@
+import 'package:bi_launcher/providers/sectionControls.dart';
+import 'package:bi_launcher/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'subPage/appsArea.dart';
 import 'subPage/favArea.dart';
@@ -30,13 +33,46 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  /*===========================================================
+                                         HEADER AREA
+                  ===========================================================*/
+
                   HeaderArea(),
-                  FavArea(),
+
+                  /*===========================================================
+                                       FAV AREA & SECTION TITLE
+                  ===========================================================*/
+
+                  Consumer<FavCtrl>(
+                    builder: (context, isFav, child) {
+                      return Visibility(
+                        visible: isFav.isFav,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SectionTitle(title: "Favorite"),
+                            FavArea(),
+                            SectionTitle(title: "Applications"),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+
+                  /*===========================================================
+                                        APPLICATION AREA
+                  ===========================================================*/
+
                   AppsArea(),
                 ],
               ),
             ),
           ),
+
+          /*===========================================================
+                                         SIDEBAR AREA
+          ===========================================================*/
+
           Sidebar(),
         ],
       ),
