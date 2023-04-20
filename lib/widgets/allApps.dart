@@ -39,7 +39,6 @@ class AllApps extends StatelessWidget {
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // if (1 == 0) {
           List<Application>? allApps = snapshot.data;
           return GridView.count(
             shrinkWrap: true,
@@ -129,38 +128,32 @@ class AllApps extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  // color: Color(0xff303030),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isClr ? tempcol : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: isClr ? tempcol : Colors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.memory(
+                        (allApps[index] as ApplicationWithIcon).icon,
+                        width: appIconWidth,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.memory(
-                            (allApps[index] as ApplicationWithIcon).icon,
-                            width: appIconWidth,
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              "${allApps[index].appName}",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 2,
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "${allApps[index].appName}",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );

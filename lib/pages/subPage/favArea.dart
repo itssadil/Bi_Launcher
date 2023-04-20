@@ -19,6 +19,7 @@ class FavArea extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.25,
             child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
                 childAspectRatio: 1.5,
@@ -26,31 +27,39 @@ class FavArea extends StatelessWidget {
               itemCount: favMovieList.appPackageNames.length,
               itemBuilder: (context, index) {
                 return FutureBuilder(
-                  future:
-                      DeviceApps.getApp(favMovieList.appPackageNames[index]),
+                  future: DeviceApps.getApp(
+                      favMovieList.appPackageNames[index], true),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       Application? app = snapshot.data;
                       if (app != null) {
                         return GridTile(
                           child: GestureDetector(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // Image.memory(
-                                //   (app as ApplicationWithIcon).icon,
-                                //   width: 48.0,
-                                // ),
-                                SizedBox(height: 8.0),
-                                Text(
-                                  app.appName,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white12),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.memory(
+                                    (app as ApplicationWithIcon).icon,
+                                    width: 80,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(height: 2.0),
+                                  Text(
+                                    app.appName,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             onTap: () async {
                               await DeviceApps.openApp(app.packageName);
