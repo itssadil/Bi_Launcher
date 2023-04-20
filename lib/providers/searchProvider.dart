@@ -9,7 +9,10 @@ class SearchProvider extends ChangeNotifier {
 
   cngShowSearch() {
     _isShowSearch = !_isShowSearch;
-    _srcIcon == Icon(Icons.search) ? Icon(Icons.cancel) : Icon(Icons.search);
+    // _srcIcon = _srcIcon != Icon(Icons.search)
+    //     ? Icon(Icons.cancel)
+    //     : Icon(Icons.search);
+
     notifyListeners();
   }
 }

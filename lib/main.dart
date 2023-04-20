@@ -68,9 +68,17 @@ class _mainSfullState extends State<mainSfull> {
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyle(color: Colors.white),
-                  border: InputBorder.none,
+                  hintText: 'Search...',
+                  hintStyle: TextStyle(color: Colors.teal),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      _searchController.clear();
+                    },
+                    icon: Icon(Icons.clear),
+                  ),
                 ),
                 style: TextStyle(color: Colors.white),
                 onSubmitted: (value) {
