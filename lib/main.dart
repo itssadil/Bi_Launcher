@@ -1,7 +1,9 @@
+// import 'package:bi_launcher/pages/homePage.dart';
 import 'package:bi_launcher/pages/homePage.dart';
+import 'package:bi_launcher/pages/searchPage.dart';
 import 'package:bi_launcher/providers/favProvider.dart';
-import 'package:bi_launcher/providers/searchProvider.dart';
 import 'package:bi_launcher/providers/sectionControls.dart';
+// import 'package:bi_launcher/widgets/allApps.dart';
 import 'package:bi_launcher/widgets/myDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,6 @@ void main() {
         ChangeNotifierProvider(create: (context) => FavCtrl()),
         ChangeNotifierProvider(create: (context) => SidebarCtrl()),
         ChangeNotifierProvider(create: (context) => FavMovieList()),
-        ChangeNotifierProvider(create: (context) => SearchProvider()),
       ],
       child: MyApp(),
     ),
@@ -61,42 +62,15 @@ class _mainSfullState extends State<mainSfull> {
         leading: Image(
           image: AssetImage("assets/images/bi/Bi1.png"),
         ),
-        title: Consumer<SearchProvider>(
-          builder: (context, isShowSearch, child) {
-            return Visibility(
-              visible: isShowSearch.isShowSearch,
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  hintStyle: TextStyle(color: Colors.teal),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      _searchController.clear();
-                    },
-                    icon: Icon(Icons.clear),
-                  ),
-                ),
-                style: TextStyle(color: Colors.white),
-                onSubmitted: (value) {
-                  // Handle search logic here
-                },
-              ),
-            );
-          },
-        ),
         actions: [
-          Consumer<SearchProvider>(builder: (context, isShowSearch, child) {
-            return IconButton(
-              onPressed: () {
-                isShowSearch.cngShowSearch();
-              },
-              icon: isShowSearch.srcIcon,
-            );
-          }),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => SearchPage(),
+              ));
+            },
+            icon: Icon(Icons.search),
+          ),
           Builder(
             builder: (context) {
               return IconButton(
@@ -126,6 +100,7 @@ class _mainSfullState extends State<mainSfull> {
           ),
         ),
         child: HomePage(),
+        // child: SearchPage(),
       ),
     );
   }
