@@ -65,28 +65,6 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white12,
-        title: TextField(
-          controller: _searchController,
-          onChanged: _search,
-          decoration: InputDecoration(
-            hintText: 'Search apps...',
-            border: InputBorder.none,
-            suffixIcon: IconButton(
-              onPressed: () {
-                _searchController.clear();
-              },
-              icon: Icon(
-                Icons.cancel,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ),
       body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
@@ -101,7 +79,44 @@ class _SearchPageState extends State<SearchPage> {
               end: Alignment.topRight,
             ),
           ),
-          child: _buildBody()),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.blue,
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(
+                          Icons.arrow_back_rounded,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextField(
+                        controller: _searchController,
+                        onChanged: _search,
+                        decoration: InputDecoration(
+                          enabled: true,
+                          label: Text('Search apps...'),
+                          border: OutlineInputBorder(),
+                          suffixIcon: Icon(
+                            Icons.search,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              _buildBody(),
+            ],
+          )),
     );
   }
 
@@ -117,40 +132,42 @@ class _SearchPageState extends State<SearchPage> {
         child: Text('No apps found'),
       );
     }
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: 1.5,
+    return Expanded(
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+          childAspectRatio: 1.5,
+        ),
+        itemCount: apps.length,
+        itemBuilder: (BuildContext context, int index) {
+          Application app = apps[index];
+          return InkWell(
+            onTap: () {
+              DeviceApps.openApp(app.packageName);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.memory(
+                  (app as ApplicationWithIcon).icon,
+                  width: 64,
+                  height: 64,
+                ),
+                SizedBox(height: 4),
+                Text(
+                  app.appName,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          );
+        },
       ),
-      itemCount: apps.length,
-      itemBuilder: (BuildContext context, int index) {
-        Application app = apps[index];
-        return InkWell(
-          onTap: () {
-            DeviceApps.openApp(app.packageName);
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.memory(
-                (app as ApplicationWithIcon).icon,
-                width: 64,
-                height: 64,
-              ),
-              SizedBox(height: 4),
-              Text(
-                app.appName,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 12),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
