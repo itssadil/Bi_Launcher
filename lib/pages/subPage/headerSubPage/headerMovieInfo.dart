@@ -1,7 +1,7 @@
-import 'package:bi_launcher/pages/subPage/headerSubPage/headerMovies.dart';
 import 'package:bi_launcher/providers/sectionControls.dart';
 import 'package:bi_launcher/widgets/waitingForInfo.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget HeaderMovieInfo({
   required Size size,
@@ -12,7 +12,13 @@ Widget HeaderMovieInfo({
   required String Function(Map<String, dynamic> movieInfo) getGenres,
   List<Map<String, dynamic>>? moviesDetails,
   required HeaderMoviesCtrl isHeaderMovie,
+  required String link1,
+  required String link2,
+  required String link3,
+  required String link4,
+  required String link5,
 }) {
+  late Uri url;
   return Visibility(
     visible: isHeaderMovie.isHeaderMovie,
     child: Padding(
@@ -120,13 +126,39 @@ Widget HeaderMovieInfo({
                                     backgroundColor: Colors.blue,
                                     radius: 30,
                                     child: IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HeaderMovies(movieId: index),
-                                            ));
+                                      onPressed: () async {
+                                        switch (index) {
+                                          case 0:
+                                            {
+                                              url = Uri.parse(link1);
+                                              break;
+                                            }
+                                          case 1:
+                                            {
+                                              url = Uri.parse(link2);
+                                              break;
+                                            }
+                                          case 2:
+                                            {
+                                              url = Uri.parse(link3);
+                                              break;
+                                            }
+                                          case 3:
+                                            {
+                                              url = Uri.parse(link4);
+                                              break;
+                                            }
+                                          default:
+                                            {
+                                              url = Uri.parse(link5);
+                                              break;
+                                            }
+                                        }
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url,
+                                              mode: LaunchMode
+                                                  .externalApplication);
+                                        }
                                       },
                                       icon: Icon(
                                         Icons.play_arrow,

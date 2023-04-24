@@ -57,6 +57,7 @@ class FavArea extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16.0,
                                     ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
                               ),

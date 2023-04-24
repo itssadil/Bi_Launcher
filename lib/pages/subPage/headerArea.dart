@@ -26,10 +26,10 @@ class _HeaderAreaState extends State<HeaderArea> {
     final String apiKey = 'b76a2dbf8c9342e2d6eb6b2c2e8c8a60';
     final List<int> movieIds = [
       864692,
-      628241,
+      496331,
       57800,
-      918864,
-      564147
+      585268,
+      20453
     ]; // The TMDB IDs of the movies
     final String url =
         'https://api.themoviedb.org/3/movie/{movieId}?api_key=$apiKey&append_to_response=credits';
@@ -97,6 +97,12 @@ class _HeaderAreaState extends State<HeaderArea> {
               getCast: _getCast,
               getGenres: _getGenres,
               moviesDetails: _moviesInfo,
+              link1: "https://goku.sx/movie/watch-pathaan-94630",
+              link2: "https://goku.sx/movie/watch-brahmastra-41699",
+              link3:
+                  "https://goku.sx/movie/watch-ice-age-continental-drift-19231",
+              link4: "https://goku.sx/movie/watch-war-41589",
+              link5: "https://goku.sx/movie/watch-3-idiots-69690",
             ),
           ],
         );
