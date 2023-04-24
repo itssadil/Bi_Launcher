@@ -114,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-              _buildBody(),
+              Expanded(child: _buildBody()),
             ],
           )),
     );
@@ -132,42 +132,40 @@ class _SearchPageState extends State<SearchPage> {
         child: Text('No apps found'),
       );
     }
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 1.5,
-        ),
-        itemCount: apps.length,
-        itemBuilder: (BuildContext context, int index) {
-          Application app = apps[index];
-          return InkWell(
-            onTap: () {
-              DeviceApps.openApp(app.packageName);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.memory(
-                  (app as ApplicationWithIcon).icon,
-                  width: 64,
-                  height: 64,
-                ),
-                SizedBox(height: 4),
-                Text(
-                  app.appName,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 12),
-                ),
-              ],
-            ),
-          );
-        },
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 5,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+        childAspectRatio: 1.5,
       ),
+      itemCount: apps.length,
+      itemBuilder: (BuildContext context, int index) {
+        Application app = apps[index];
+        return InkWell(
+          onTap: () {
+            DeviceApps.openApp(app.packageName);
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.memory(
+                (app as ApplicationWithIcon).icon,
+                width: 64,
+                height: 64,
+              ),
+              SizedBox(height: 4),
+              Text(
+                app.appName,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
