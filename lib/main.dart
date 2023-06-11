@@ -14,6 +14,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => HeaderMoviesCtrl()),
         ChangeNotifierProvider(create: (context) => FavCtrl()),
+        ChangeNotifierProvider(create: (context) => SiteCtrl()),
         ChangeNotifierProvider(create: (context) => SidebarCtrl()),
         ChangeNotifierProvider(create: (context) => FavMovieList()),
       ],

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'subPage/appsArea.dart';
 import 'subPage/favArea.dart';
 import 'subPage/headerArea.dart';
+import 'subPage/moviesSite.dart';
 import 'subPage/sidebar.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,6 +39,12 @@ class _HomePageState extends State<HomePage> {
                   ===========================================================*/
 
                   HeaderArea(),
+
+                  /*===========================================================
+                                           MOVIE SITE
+                  ===========================================================*/
+
+                  MoviesSite(),
 
                   /*===========================================================
                                        FAV AREA & SECTION TITLE

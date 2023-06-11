@@ -75,6 +75,43 @@ class FavCtrl extends ChangeNotifier {
 }
 
 /*===============================================================
+                      MOVIES SITE CONTROL
+================================================================*/
+
+class SiteCtrl extends ChangeNotifier {
+  bool _isSite = true;
+  bool get isSite => _isSite;
+
+  SiteCtrl() {
+    initialState();
+  }
+
+  void initialState() {
+    syncDataWithProvider();
+  }
+
+  Future cngSite() async {
+    _isSite = !_isSite;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setBool('prefSiteLink', _isSite);
+
+    notifyListeners();
+  }
+
+  Future syncDataWithProvider() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var reslut = prefs.getBool('prefSiteLink');
+
+    if (reslut != null) {
+      _isSite = reslut;
+    }
+
+    notifyListeners();
+  }
+}
+
+/*===============================================================
                       SIDEBAR CONTROL
 ================================================================*/
 

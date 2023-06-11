@@ -49,6 +49,16 @@ class MyDrawer extends StatelessWidget {
                     );
                   },
                 ),
+                Consumer<SiteCtrl>(
+                  builder: (context, isSite, child) {
+                    return SwitchListTile(
+                      value: isSite.isSite,
+                      activeColor: Colors.blue,
+                      onChanged: (value) => isSite.cngSite(),
+                      title: Text("Movies Site"),
+                    );
+                  },
+                ),
                 Consumer<SidebarCtrl>(
                   builder: (context, isSidebar, child) {
                     return SwitchListTile(
