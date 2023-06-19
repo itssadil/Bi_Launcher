@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "942810349511",
+    "project_id": "bi-launcher-e24c9",
+    "storage_bucket": "bi-launcher-e24c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942810349511:android:91d02cfdc0461c68e8e3e2",
+        "android_client_info": {
+          "package_name": "adiltapadar.me.bi_launcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942810349511-6t5cbookp0ma9tclunhgh9ecdug641dp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "adiltapadar.me.bi_launcher",
+            "certificate_hash": "4c79f447d427f1101b5f21036b53836ecb24e462"
+          }
+        },
+        {
+          "client_id": "942810349511-a79098ohurlmqjdqs946pf8s9k6ghosa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALv-zFy9hV4cUAgqfzIp60S-o9lTMgxxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942810349511-a79098ohurlmqjdqs946pf8s9k6ghosa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
