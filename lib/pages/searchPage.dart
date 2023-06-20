@@ -66,43 +66,47 @@ class _SearchPageState extends State<SearchPage> {
               end: Alignment.topRight,
             ),
           ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Colors.blue,
-                      child: IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: Icon(
-                          Icons.arrow_back_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextField(
-                        controller: _searchController,
-                        onChanged: _search,
-                        decoration: InputDecoration(
-                          enabled: true,
-                          label: Text('Search apps...'),
-                          border: OutlineInputBorder(),
-                          suffixIcon: Icon(
-                            Icons.search,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 22,
+                        backgroundColor: Colors.blue,
+                        child: IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: Icon(
+                            Icons.arrow_back_rounded,
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: TextField(
+                          controller: _searchController,
+                          onChanged: _search,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12.0),
+                            enabled: true,
+                            label: Text('Search apps...'),
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(
+                              Icons.search,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(child: _buildBody()),
-            ],
+                Expanded(child: _buildBody()),
+              ],
+            ),
           )),
     );
   }
