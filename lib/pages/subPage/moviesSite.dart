@@ -1,5 +1,6 @@
 import 'package:bi_launcher/providers/sectionControls.dart';
 import 'package:bi_launcher/widgets/sectionTitle.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,50 +10,46 @@ class MoviesSite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List moviesLink = [
-      {
-        "name": "Goku.to",
-        "link": "https://goku.sx/home",
-      },
-      {
-        "name": "Movies Flix",
-        "link": "https://www.hindimoviestv.com/",
-      },
-      {
-        "name": "Zee5",
-        "link": "https://zee5.vin/",
-      },
-      {
-        "name": "mFlix",
-        "link": "https://www.youtube.com/@RGEntertainmentIndia/videos",
-      },
-      {
-        "name": "Goldmines",
-        "link": "https://www.youtube.com/@GrandMasterMoviesOfficial/videos",
-      },
-    ];
     Size size = MediaQuery.of(context).size;
-    return Consumer<SiteCtrl>(
-      builder: (context, isSite, child) {
-        return Visibility(
-          visible: isSite.isSite,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SectionTitle(title: "Movies Site"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  sitesMethod(size, moviesLink, 0),
-                  sitesMethod(size, moviesLink, 1),
-                  sitesMethod(size, moviesLink, 2),
-                  sitesMethod(size, moviesLink, 3),
-                  sitesMethod(size, moviesLink, 4),
-                ],
-              )
-            ],
-          ),
-        );
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('movieSite').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError ||
+            snapshot.connectionState == ConnectionState.waiting ||
+            snapshot == null) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (snapshot != null && snapshot.data != null) {
+          print("aaaaaaaaaaaaaaaaaaaaaaa ${snapshot.data!.docs[0]["name"]}");
+          return Consumer<SiteCtrl>(
+            builder: (context, isSite, child) {
+              return Visibility(
+                visible: isSite.isSite,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SectionTitle(title: "Movies Site"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        sitesMethod(size, snapshot.data!.docs, 0),
+                        sitesMethod(size, snapshot.data!.docs, 1),
+                        sitesMethod(size, snapshot.data!.docs, 2),
+                        sitesMethod(size, snapshot.data!.docs, 3),
+                        sitesMethod(size, snapshot.data!.docs, 4),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        }
+
+        return Container();
       },
     );
   }
